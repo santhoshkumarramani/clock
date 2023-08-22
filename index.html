@@ -1,0 +1,135 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Clock</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Graduate&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+	<style>
+	
+	*{
+		font-family: 'Graduate', cursive;
+	}
+	body{
+		background:black;
+	}
+	
+	.clock{
+		height:70vh;
+		display:flex;
+		justify-content:center;
+		align-items:center;
+		font-size: 20px;
+		margin-top: 5em;
+	}
+	#hrs,#min,#sec,#day{
+		color: red;
+	}
+	
+	h1{
+		font-family: 'Orbitron', sans-serif;
+		text-align: center;
+		font-size: 25px;
+	}
+	h2{
+		text-align:center;
+	}
+	h3{
+		text-align:center;
+		font-size:30px;
+		color:white;
+	}
+	
+	.clock div{
+	    border: 5px solid red;
+		padding: 41px;
+		border-radius: 50%;
+		background: green;
+	}
+	.label{
+		color:yellow;
+	}
+	#zonetime{
+		color:white;
+	}
+	</style>
+</head>
+<body>
+	
+	<div class="clock">
+		<div>
+			<h3>CLOCK</h3>
+			<h1>
+				<span class="label">HOUR</span><span>-</span><span id="hrs">00</span></span><span>-</span>
+				<span class="label">MIN</span><span>-</span><span id="min">00</span><span>-</span>
+				<span class="label">SEC</span><span>-</span><span id="sec">00</span><span>-</span><span id="zonetime">
+			</h1>
+			<h2>
+				<span class="label">DAY-<span id="day"></span></span>
+			</h2>
+		</div>
+	</div>
+    <script>
+			
+			function clockFun(){
+			let currentHrs=document.getElementById("hrs");
+            let currentZone=document.getElementById("zonetime");
+			let currentMin=document.getElementById('min');
+            let currentSec=document.getElementById('sec');
+            let currentDay=document.getElementById('day');
+			
+
+            let date=new Date();
+            let getHrs=date.getHours();
+            let getMin=date.getMinutes();
+            let getSec=date.getSeconds();
+            let getDay=date.toString().split(' ')[0];
+			
+			var zone= getHrs >= 12 ? "PM":"AM";
+			getHrs=getHrs?getHrs:12;
+			getHrs>12?getHrs=getHrs-12:'';
+			getSec=getSec<10?"0"+getSec:getSec;
+			getMin=getMin<10?"0"+getMin:getMin;
+			getHrs=getHrs<10?"0"+getHrs:getHrs;
+           
+			
+            if (getDay==="Mon"){
+				getDay=getDay+"day";
+			}
+			else if(getDay==="Tue"){
+				getDay=getDay+"sday";
+			}
+			else if(getDay==="Wed"){
+				getDay=getDay+"nesday";
+			}
+			else if(getDay==="Thu"){
+				getDay=getDay+"rsday";
+			}
+			else if(getDay==="Fri"){
+				getDay=getDay+"day";
+			}
+			else if(getDay==="Sat"){
+				getDay=getDay+"urday";
+			}
+			else{
+				getDay=getDay+"day";
+			}
+			
+			
+            currentHrs.innerHTML=getHrs;
+			currentZone.innerHTML=zone;
+            currentMin.innerHTML=getMin;
+            currentSec.innerHTML=getSec;
+			currentDay.innerHTML=getDay;	
+			
+			
+			
+        }
+		setInterval(clockFun,1000);
+		
+    </script>
+
+</body>
+</html>
